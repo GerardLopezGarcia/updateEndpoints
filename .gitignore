@@ -1,6 +1,6 @@
 # Ignorar directorio node_modules
 node_modules/
-
+.env
 # Ignorar archivos de configuración específicos de npm
 package-lock.json
 npm-debug.log
