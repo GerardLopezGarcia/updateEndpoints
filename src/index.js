@@ -10,13 +10,13 @@ function formatChangesHtml(changes) {
       let path = change.path.join('.');
       switch (change.kind) {
         case 'N':
-          return `<li>🟢Nuevo endpoint: ${path} -> ${JSON.stringify(change.rhs, null, 2)}</li><br>`;
+          return `<li>🟢Nuevo endpoint: ${path} -> <pre>${JSON.stringify(change.rhs, null, 2)}</pre></li><br>`;
         case 'D':
           return `<li>❌Endpoint eliminado: ${path}</li><br>`;
         case 'E':
           return `<li>🚨Cambio en el endpoint ${path}: ${change.lhs} -> ${change.rhs}</li><br>`;
         case 'A':
-          return `<li>❗Cambio en el array ${path}: ${JSON.stringify(change.item, null, 2)}</li><br>`;
+          return `<li>❗Cambio en el array ${path}: <pre>${JSON.stringify(change.item, null, 2)}</pre></li><br>`;
       }
     }).join('');
   }

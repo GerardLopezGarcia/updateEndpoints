@@ -21,6 +21,15 @@ async function sendEmail(changes) {
                     h1 { color: #333; }
                     p { color: #666; }
                     ul { color: #999; }
+                    pre {
+                        background-color: #f5f5f5;
+                        border: 1px solid #ddd;
+                        padding: 10px;
+                        overflow: auto;
+                        max-height: 200px; /* Ajusta la altura máxima según tus necesidades */
+                        font-size: 14px;
+                        line-height: 1.4;
+                      }
                 </style>
                 <body>
                     <h1>${title}</h1>
