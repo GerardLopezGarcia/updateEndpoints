@@ -44,7 +44,7 @@ async function main() {
 
     if (changes) {
       console.log('Se han detectado los siguientes cambios:', changes);
-      allChanges.push(`<h2>Cambios en la documentación: ${url}</h2>`);
+      allChanges.push(`<h2>Cambios en la documentación: <span class="url">${url}</span></h2>`);
       allChanges.push(`<ul>${formatChangesHtml(changes)}</ul>`);
 
       // Guarda los nuevos endpoints
