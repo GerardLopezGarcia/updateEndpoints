@@ -11,6 +11,7 @@ async function sendEmail(changes) {
     let title = "🚀 Actualización semanal de endpoints 🐳";
     let description = "Buenos días a todos! como cada lunes os traigo los cambios en los endpoints que se han producido durante la semana pasada:";
     let ending = "🔨 Sigamos construyendo y mejorando este software increíble juntos. ¡Hasta la próxima equipo! 📚📈"
+    let disclaimer = "🧪 * Este email ha sido generado con una aplicación y podría contener fallos, en caso de encontrar algún endpoint de interés en el que se esté trabajando, revisar la documentación original. * 👨‍🔬";
     let mailOptions = {
         from: process.env.EMAIL,
         to: 'gerard.lopez.garcia@gmail.com, amigosBuenosAmigos@outlook.es',
@@ -41,12 +42,18 @@ async function sendEmail(changes) {
                         color: #59a14f; /*rojo #e06666; */
                         font-style: italic; 
                     }
+                    .small-text {
+                        font-size: 15px;
+                        color: #999999;
+                        font-style: italic; 
+                    }
                 </style>
                 <body>
                     <h1>${title}</h1>
                     <p>${description}</p>
                     ${changes}
                     <p>${ending}</p>
+                    <p class="small-text">${disclaimer}</p>
                 </body>`
     }
 

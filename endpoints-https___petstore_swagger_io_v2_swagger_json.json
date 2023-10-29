@@ -29,13 +29,6 @@
         "type": "string"
       },
       {
-        "name": "additionalotrotema",
-        "in": "formData",
-        "description": "Additional data to pass to server",
-        "required": false,
-        "type": "string"
-      },
-      {
         "name": "file",
         "in": "formData",
         "description": "file to upload",

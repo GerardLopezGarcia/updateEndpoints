@@ -12,9 +12,9 @@ function formatChangesHtml(changes) {
       case 'N':
         return `<li>🟢Nuevo endpoint: ${path} -> <pre>${JSON.stringify(change.rhs, null, 2)}</pre></li><br>`;
       case 'D':
-        return `<li>❌Endpoint eliminado: ${path}</li><br>`;
+        return `<li>❌Endpoint eliminado: <span style="color: #e06666;">${path}</span></li><br>`;
       case 'E':
-        return `<li>🚨Cambio en el endpoint ${path}: ${change.lhs} -> ${change.rhs}</li><br>`;
+        return `<li>🚨Cambio en el endpoint <span class="url">${change.path[0]}</span> : <br> valor anterior :  ${change.rhs} ->  valor actualizado : ${change.lhs}</li><br>`;
       case 'A':
         return `<li>❗Cambio en el array ${path}: <pre>${JSON.stringify(change.item, null, 2)}</pre></li><br>`;
     }
