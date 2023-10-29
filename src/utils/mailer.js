@@ -10,7 +10,7 @@ async function sendEmail(changes) {
     });
     let title = "🚀 Actualización semanal de endpoints 🐳";
     let description = "Buenos días a todos! como cada lunes os traigo los cambios en los endpoints que se han producido durante la semana pasada:";
-    let ending = "🔨 Sigamos construyendo mejorando este software increíble juntos. ¡Hasta la próxima equipo! 📚📈"
+    let ending = "🔨 Sigamos construyendo y mejorando este software increíble juntos. ¡Hasta la próxima equipo! 📚📈"
     let mailOptions = {
         from: process.env.EMAIL,
         to: 'gerard.lopez.garcia@gmail.com, amigosBuenosAmigos@outlook.es',
