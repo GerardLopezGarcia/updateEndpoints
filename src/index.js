@@ -32,7 +32,7 @@ async function main() {
 
     // Carga los endpoints antiguos
     let oldEndpoints;
-    let filename = `endpoints-${url.replace(/\W/g, '_')}.json`; 
+    let filename = `endpoints-${url.replace(/\W/g, '_')}.json`;
     try {
       oldEndpoints = JSON.parse(fs.readFileSync(filename));
     } catch (error) {
@@ -44,7 +44,8 @@ async function main() {
 
     if (changes) {
       console.log('Se han detectado los siguientes cambios:', changes);
-      allChanges.push(...changes);
+      allChanges.push(`<h2>Cambios en la documentación: ${url}</h2>`);
+      allChanges.push(`<ul>${formatChangesHtml(changes)}</ul>`);
 
       // Guarda los nuevos endpoints
       fs.writeFileSync(filename, JSON.stringify(newEndpoints, null, 2));
@@ -55,7 +56,7 @@ async function main() {
 
   if (allChanges.length > 0) {
     // Aquí es donde se utiliza la función del paso 3
-    let changesHtml = `<ul>${formatChangesHtml(allChanges)}</ul>`;
+    let changesHtml = allChanges.join('');
     await sendEmail(changesHtml);
   }
 }
@@ -73,8 +74,9 @@ main();
 
     // Carga los endpoints antiguos
     let oldEndpoints;
+    let filename = `endpoints-${url.replace(/\W/g, '_')}.json`; // Aquí es donde se añade la línea
     try {
-      oldEndpoints = JSON.parse(fs.readFileSync(`endpoints-${url}.json`));
+      oldEndpoints = JSON.parse(fs.readFileSync(filename));
     } catch (error) {
       oldEndpoints = {};
     }
@@ -87,7 +89,7 @@ main();
       allChanges.push(...changes);
 
       // Guarda los nuevos endpoints
-      fs.writeFileSync(`endpoints-${url}.json`, JSON.stringify(newEndpoints, null, 2));
+      fs.writeFileSync(filename, JSON.stringify(newEndpoints, null, 2)); // Aquí también se utiliza 'filename'
     } else {
       console.log('No se han detectado cambios.');
     }
@@ -100,6 +102,7 @@ main();
   }
 }
 
+main();
 
 version q funciona --------- 
 

@@ -26,7 +26,7 @@ async function sendEmail(changes) {
                         border: 1px solid #ddd;
                         padding: 10px;
                         overflow: auto;
-                        max-height: 200px; /* Ajusta la altura máxima según tus necesidades */
+                        max-height: 200px; 
                         font-size: 14px;
                         line-height: 1.4;
                       }
