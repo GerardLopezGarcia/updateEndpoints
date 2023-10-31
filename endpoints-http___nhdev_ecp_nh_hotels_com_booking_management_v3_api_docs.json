@@ -1,5 +1,5 @@
 {
-  "PUT /{pubId}/reservation/upselling-modify": {
+  "PUT /{pubId}/otrahistoriaaa/upselling-modify": {
     "tags": [
       "reservation-controller"
     ],
