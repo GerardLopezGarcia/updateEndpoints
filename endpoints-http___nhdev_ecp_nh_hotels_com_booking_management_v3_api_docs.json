@@ -1,0 +1,3168 @@
+{
+  "PUT /{pubId}/reservation/upselling-modify": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "handleUpdateUpsellingReservation",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "signature",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "upsellingId": {
+                "type": "string"
+              },
+              "contracted": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reservationId": {
+                  "type": "string"
+                },
+                "hotelId": {
+                  "type": "string"
+                },
+                "checkInDate": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "PUT /{pubId}/reservation/modify/{reservationId}": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "handleUpdateReservation",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "reservationId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "hotelId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "checkInDate",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "savePrivateData",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      {
+        "name": "isB2b",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "surname": {
+                "type": "string"
+              },
+              "mail": {
+                "type": "string"
+              },
+              "telephone": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "party": {
+                "type": "string"
+              },
+              "roomList": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "bedType": {
+                      "type": "string"
+                    },
+                    "smoker": {
+                      "type": "boolean"
+                    },
+                    "comments": {
+                      "type": "string"
+                    },
+                    "guestList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "surname": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reservationId": {
+                  "type": "string"
+                },
+                "hotelId": {
+                  "type": "string"
+                },
+                "checkInDate": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "PUT /{pubId}/reservation/guarantee/{reservationId}/{source}": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "handleGuaranteeReservation",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "reservationId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "source",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reservationId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "PUT /{pubId}/reservation/cancel": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "handleCancelReservation",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "savePrivateData",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      {
+        "name": "cancelType",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "normal"
+        }
+      },
+      {
+        "name": "MYNH_DEVICE",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "desktop"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "required": [
+              "signature"
+            ],
+            "type": "object",
+            "properties": {
+              "signature": {
+                "type": "string"
+              },
+              "checkInDate": {
+                "type": "string"
+              },
+              "hotelId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "surname": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "telephone": {
+                "type": "string"
+              },
+              "comments": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "party": {
+                "type": "string"
+              },
+              "motives": {
+                "type": "string"
+              },
+              "cmp": {
+                "type": "string"
+              },
+              "cmpView": {
+                "type": "string"
+              },
+              "domain": {
+                "type": "string"
+              },
+              "subDomain": {
+                "type": "boolean"
+              },
+              "roomIdReservation": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "gdprChecks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reservationId": {
+                  "type": "string"
+                },
+                "hotelId": {
+                  "type": "string"
+                },
+                "checkInDate": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "surname": {
+                  "type": "string"
+                },
+                "cancelDate": {
+                  "type": "string"
+                },
+                "cancelledRoomList": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "roomTypeFrontCode": {
+                        "type": "string"
+                      },
+                      "idReservation": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "amountAfterTax": {
+                        "type": "string"
+                      },
+                      "currency": {
+                        "type": "object",
+                        "properties": {
+                          "currencyCode": {
+                            "type": "string"
+                          },
+                          "defaultFractionDigits": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "numericCode": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "displayName": {
+                            "type": "string"
+                          },
+                          "symbol": {
+                            "type": "string"
+                          },
+                          "numericCodeAsString": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "cancelCondition": {
+                  "type": "object",
+                  "properties": {
+                    "condition": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "allRoomsCancelled": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "PUT /{pubId}/reservation/cancel/{reservationId}": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "handleCancelReservationOLD",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "reservationId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "savePrivateData",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      {
+        "name": "cancelType",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "normal"
+        }
+      },
+      {
+        "name": "MYNH_DEVICE",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "desktop"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "required": [
+              "signature"
+            ],
+            "type": "object",
+            "properties": {
+              "signature": {
+                "type": "string"
+              },
+              "checkInDate": {
+                "type": "string"
+              },
+              "hotelId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "surname": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "telephone": {
+                "type": "string"
+              },
+              "comments": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "party": {
+                "type": "string"
+              },
+              "motives": {
+                "type": "string"
+              },
+              "cmp": {
+                "type": "string"
+              },
+              "cmpView": {
+                "type": "string"
+              },
+              "domain": {
+                "type": "string"
+              },
+              "subDomain": {
+                "type": "boolean"
+              },
+              "roomIdReservation": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "gdprChecks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reservationId": {
+                  "type": "string"
+                },
+                "hotelId": {
+                  "type": "string"
+                },
+                "checkInDate": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "surname": {
+                  "type": "string"
+                },
+                "cancelDate": {
+                  "type": "string"
+                },
+                "cancelledRoomList": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "roomTypeFrontCode": {
+                        "type": "string"
+                      },
+                      "idReservation": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "amountAfterTax": {
+                        "type": "string"
+                      },
+                      "currency": {
+                        "type": "object",
+                        "properties": {
+                          "currencyCode": {
+                            "type": "string"
+                          },
+                          "defaultFractionDigits": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "numericCode": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "displayName": {
+                            "type": "string"
+                          },
+                          "symbol": {
+                            "type": "string"
+                          },
+                          "numericCodeAsString": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "cancelCondition": {
+                  "type": "object",
+                  "properties": {
+                    "condition": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "allRoomsCancelled": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "deprecated": true
+  },
+  "PUT /addMissingBooking": {
+    "tags": [
+      "missing-booking-controller"
+    ],
+    "operationId": "handleSearchAndSetReservation",
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "reservationId": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reservationId": {
+                  "type": "string"
+                },
+                "userName": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /{pubId}/reservation/getSignature": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "getSignatureFromSearch_1",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "reservationId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "hotelId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "checkInDate",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "signature": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "POST /{pubId}/reservation/getSignature": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "getSignatureFromSearch",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "hotelId": {
+                "type": "string"
+              },
+              "reservationId": {
+                "type": "string"
+              },
+              "checkInDate": {
+                "type": "string"
+              },
+              "formEServicing": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "signature": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "POST /getURLPci/{pubId}": {
+    "tags": [
+      "pci-controller"
+    ],
+    "operationId": "getURLPciPostHandler",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "hotelBackCode": {
+                "type": "string"
+              },
+              "reservationId": {
+                "type": "string"
+              },
+              "brand": {
+                "type": "string"
+              },
+              "callBackURL": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /{pubId}/reservation": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "findReservationBySignature",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "signature",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "UPSELLING",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "upselling",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idReservation": {
+                  "type": "string"
+                },
+                "idReservationWeb": {
+                  "type": "string"
+                },
+                "hotelBackcode": {
+                  "type": "string"
+                },
+                "hotelFrontCode": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "endDate": {
+                  "type": "string"
+                },
+                "cityTaxType": {
+                  "type": "string"
+                },
+                "isExternalReservation": {
+                  "type": "boolean"
+                },
+                "ociAvailable": {
+                  "type": "boolean"
+                },
+                "statusOci": {
+                  "type": "string"
+                },
+                "roomCheckedIn": {
+                  "type": "boolean"
+                },
+                "hasMoreThanOneGuest": {
+                  "type": "boolean"
+                },
+                "groupon": {
+                  "type": "boolean"
+                },
+                "guaranteeReservation": {
+                  "type": "boolean"
+                },
+                "titular": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "surname1": {
+                      "type": "string"
+                    },
+                    "surname2": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "phone1": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "roomList": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "idReservation": {
+                        "type": "string"
+                      },
+                      "roomTypeFrontCode": {
+                        "type": "string"
+                      },
+                      "roomName": {
+                        "type": "string"
+                      },
+                      "roomNumber": {
+                        "type": "string"
+                      },
+                      "floor": {
+                        "type": "string"
+                      },
+                      "building": {
+                        "type": "string"
+                      },
+                      "numpax1": {
+                        "type": "string"
+                      },
+                      "numpax3": {
+                        "type": "string"
+                      },
+                      "numpax4": {
+                        "type": "string"
+                      },
+                      "amenitySmoker": {
+                        "type": "boolean"
+                      },
+                      "notHotelSmoker": {
+                        "type": "boolean"
+                      },
+                      "babyCradle": {
+                        "type": "string"
+                      },
+                      "contractFrontCode": {
+                        "type": "string"
+                      },
+                      "mealRatePlan": {
+                        "type": "object",
+                        "properties": {
+                          "mealPlanFrontCode": {
+                            "type": "string"
+                          },
+                          "text": {
+                            "type": "string"
+                          },
+                          "services": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "tcm": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "mainRoomData": {
+                            "type": "object",
+                            "properties": {
+                              "bedTypeId": {
+                                "type": "integer",
+                                "format": "int32"
+                              },
+                              "bedTypeDescription": {
+                                "type": "string"
+                              },
+                              "capacityRoom": {
+                                "type": "integer",
+                                "format": "int32"
+                              },
+                              "bedTypeParentId": {
+                                "type": "integer",
+                                "format": "int32"
+                              },
+                              "subBedType": {
+                                "type": "boolean"
+                              },
+                              "size": {
+                                "type": "string"
+                              },
+                              "mainServices": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "key": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "mainImage": {
+                                "type": "string"
+                              },
+                              "roomCategoryDescription": {
+                                "type": "string"
+                              },
+                              "services": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "key": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "roomLink360": {
+                                "type": "string"
+                              },
+                              "imgGallery": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "url": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "bedsDescription": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "bedTypeFrontCode": {
+                        "type": "string"
+                      },
+                      "comments": {
+                        "type": "string"
+                      },
+                      "extraBed": {
+                        "type": "boolean"
+                      },
+                      "noModify": {
+                        "type": "boolean"
+                      },
+                      "noCancel": {
+                        "type": "boolean"
+                      },
+                      "guestList": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "surname1": {
+                              "type": "string"
+                            },
+                            "surname2": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "phone1": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "descriptionRoom": {
+                        "type": "string"
+                      },
+                      "cancellationFee": {
+                        "type": "object",
+                        "properties": {
+                          "amountAfterTax": {
+                            "type": "string"
+                          },
+                          "amountBeforeTax": {
+                            "type": "string"
+                          },
+                          "currencyCode": {
+                            "type": "string"
+                          },
+                          "currencySymbol": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "mealPlan": {
+                        "type": "string"
+                      },
+                      "roomTypeCode": {
+                        "type": "string"
+                      },
+                      "ratePlanId": {
+                        "type": "string"
+                      },
+                      "roomPrice": {
+                        "type": "object",
+                        "properties": {
+                          "amountAfterTax": {
+                            "type": "string"
+                          },
+                          "amountBeforeTax": {
+                            "type": "string"
+                          },
+                          "currencyCode": {
+                            "type": "string"
+                          },
+                          "tax": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "totalPrice": {
+                  "type": "object",
+                  "properties": {
+                    "amountAfterTax": {
+                      "type": "string"
+                    },
+                    "amountBeforeTax": {
+                      "type": "string"
+                    },
+                    "tax": {
+                      "type": "string"
+                    },
+                    "cityTax": {
+                      "type": "string"
+                    },
+                    "currencySymbol": {
+                      "type": "string"
+                    },
+                    "currencyCode": {
+                      "type": "string"
+                    },
+                    "amountAfterTaxAndUpselling": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "titlesRatePlanConditions": {
+                  "type": "object",
+                  "properties": {
+                    "rateTitle": {
+                      "type": "string"
+                    },
+                    "rateSubtitle": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "tmsRateConditions": {
+                  "type": "object",
+                  "properties": {
+                    "paymentConditions": {
+                      "type": "object",
+                      "properties": {
+                        "condition": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "cancelationConditions": {
+                      "type": "object",
+                      "properties": {
+                        "condition": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "guaranteeConditions": {
+                      "type": "object",
+                      "properties": {
+                        "condition": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "poolId": {
+                  "type": "string"
+                },
+                "cancellationFee": {
+                  "type": "object",
+                  "properties": {
+                    "amountAfterTax": {
+                      "type": "string"
+                    },
+                    "amountBeforeTax": {
+                      "type": "string"
+                    },
+                    "currencyCode": {
+                      "type": "string"
+                    },
+                    "currencySymbol": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "paymentType": {
+                  "type": "string"
+                },
+                "cityKey": {
+                  "type": "string"
+                },
+                "b2BUserData": {
+                  "type": "object",
+                  "properties": {
+                    "b2bUserName": {
+                      "type": "string"
+                    },
+                    "b2bUserCommission": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "differentBooker": {
+                  "type": "boolean"
+                },
+                "nights": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "reservationType": {
+                  "type": "string"
+                },
+                "rewardsRate": {
+                  "type": "boolean"
+                },
+                "upSelling": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "upsellingId": {
+                        "type": "string"
+                      },
+                      "perRoom": {
+                        "type": "boolean"
+                      },
+                      "compulsion": {
+                        "type": "string"
+                      },
+                      "contracted": {
+                        "type": "string"
+                      },
+                      "isComplementary": {
+                        "type": "boolean"
+                      },
+                      "amountAfterTax": {
+                        "type": "string"
+                      },
+                      "amountBeforeTax": {
+                        "type": "string"
+                      },
+                      "upsellingTax": {
+                        "type": "string"
+                      },
+                      "averagePricePerAdult": {
+                        "type": "string"
+                      },
+                      "averagePricePerChild": {
+                        "type": "string"
+                      },
+                      "averagePricePerNightRoom": {
+                        "type": "string"
+                      },
+                      "chargesList": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "concept": {
+                              "type": "string"
+                            },
+                            "ageQualifyingCode": {
+                              "type": "string"
+                            },
+                            "frequency": {
+                              "type": "string"
+                            },
+                            "chargesAmount": {
+                              "type": "object",
+                              "properties": {
+                                "amountBeforeTax": {
+                                  "type": "string"
+                                },
+                                "amountAfterTax": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "upgradesList": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "concept": {
+                              "type": "string"
+                            },
+                            "baseRoom": {
+                              "type": "string"
+                            },
+                            "upgradedRoom": {
+                              "type": "string"
+                            },
+                            "baseBoard": {
+                              "type": "string"
+                            },
+                            "upgradedBoard": {
+                              "type": "string"
+                            },
+                            "amountBeforeTax": {
+                              "type": "string"
+                            },
+                            "amountAfterTax": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "imageDataTitle": {
+                        "type": "string"
+                      },
+                      "imageDataAlt": {
+                        "type": "string"
+                      },
+                      "imageUrl": {
+                        "type": "string"
+                      },
+                      "stayOptionTexts": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalInfo": {
+                        "type": "object",
+                        "properties": {
+                          "additionalInfoTitle": {
+                            "type": "string"
+                          },
+                          "additionalInfoBlocks": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "title": {
+                                  "type": "string"
+                                },
+                                "blockTextList": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "additionalTimeBlocks": {
+                            "type": "object",
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "columns": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "roomData": {
+                        "type": "object",
+                        "properties": {
+                          "bedTypeId": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "bedTypeDescription": {
+                            "type": "string"
+                          },
+                          "capacityRoom": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "bedTypeParentId": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "subBedType": {
+                            "type": "boolean"
+                          },
+                          "size": {
+                            "type": "string"
+                          },
+                          "mainServices": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "key": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "mainImage": {
+                            "type": "string"
+                          },
+                          "roomCategoryDescription": {
+                            "type": "string"
+                          },
+                          "services": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "key": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "roomLink360": {
+                            "type": "string"
+                          },
+                          "imgGallery": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "url": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "bedsDescription": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "bedTypeList": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "bedTypeTCM": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "capacityRoom": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "key": {
+                              "type": "string"
+                            },
+                            "keyParentKeyword": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /{pubId}/reservation/modify": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "findReservationModifyBySignature",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "signature",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reservationId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "surname": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "hotelFrontCode": {
+                  "type": "string"
+                },
+                "hotelId": {
+                  "type": "string"
+                },
+                "startDate": {
+                  "type": "string"
+                },
+                "endDate": {
+                  "type": "string"
+                },
+                "isExternalReservation": {
+                  "type": "boolean"
+                },
+                "notModifiable": {
+                  "type": "boolean"
+                },
+                "roomCheckedIn": {
+                  "type": "boolean"
+                },
+                "isUpsellingRoomContracted": {
+                  "type": "boolean"
+                },
+                "roomList": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "roomType": {
+                        "type": "string"
+                      },
+                      "roomTypeFrontCode": {
+                        "type": "string"
+                      },
+                      "smoker": {
+                        "type": "boolean"
+                      },
+                      "smokerModifiable": {
+                        "type": "boolean"
+                      },
+                      "comments": {
+                        "type": "string"
+                      },
+                      "babyCradle": {
+                        "type": "string"
+                      },
+                      "numberAdult": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "numberChildren": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "numberBabies": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "guestList": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "surname1": {
+                              "type": "string"
+                            },
+                            "surname2": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "phone1": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "bedTypeList": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "roomBackCode": {
+                              "type": "string"
+                            },
+                            "descriptionRoom": {
+                              "type": "string"
+                            },
+                            "capacityRoom": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "tcmBedSupplementary": {
+                              "type": "string"
+                            },
+                            "numBedsSupplementary": {
+                              "type": "integer",
+                              "format": "int32"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "isB2b": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /{pubId}/reservation/getOciData": {
+    "tags": [
+      "reservation-controller"
+    ],
+    "operationId": "getOciData",
+    "parameters": [
+      {
+        "name": "signature",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "physicalRoom": {
+                  "type": "object",
+                  "properties": {
+                    "floor": {
+                      "type": "string"
+                    },
+                    "building": {
+                      "type": "string"
+                    },
+                    "roomNumber": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "isOciAvailable": {
+                  "type": "boolean"
+                },
+                "isRoomCheckedIn": {
+                  "type": "boolean"
+                },
+                "hasMoreThanOneGuest": {
+                  "type": "boolean"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /{pubId}/getPassBook": {
+    "tags": [
+      "passbook-controller"
+    ],
+    "operationId": "handlerGetPassbookBySignature",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "signature",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "brand",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK"
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /{pubId}/getPassBook/{reservationId}": {
+    "tags": [
+      "passbook-controller"
+    ],
+    "operationId": "handlerGetPassbook",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "reservationId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "brand",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "MYNH_DEVICE",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "APP_MOBILE_TOKEN",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK"
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "deprecated": true
+  }
+}

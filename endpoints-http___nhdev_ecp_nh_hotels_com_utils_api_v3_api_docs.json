@@ -1,0 +1,1343 @@
+{
+  "POST /{pubId}/confirmationEmail/{idReservation}/{hotelBackCode}": {
+    "tags": [
+      "ConfirmationEmail"
+    ],
+    "summary": "Send Email",
+    "operationId": "sendConfirmationEmailPOST",
+    "parameters": [
+      {
+        "name": "pubId",
+        "in": "path",
+        "description": "The pubId of the website",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "examples": {
+          "PubId": {
+            "summary": "Language id",
+            "description": "PubId",
+            "value": 41
+          }
+        }
+      },
+      {
+        "name": "idReservation",
+        "in": "path",
+        "description": "The reservation id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "examples": {
+          "Id Reservation ": {
+            "summary": "The id of the reservation",
+            "description": "Id Reservation ",
+            "value": "0109293995"
+          }
+        }
+      },
+      {
+        "name": "hotelBackCode",
+        "in": "path",
+        "description": "The hotel code",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "examples": {
+          "Hotel back code": {
+            "summary": "The tridion hotel code",
+            "description": "Hotel back code",
+            "value": "ESMD.BARAJ"
+          }
+        }
+      },
+      {
+        "name": "templateType",
+        "in": "query",
+        "description": "Type of email template",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "default": "confirm"
+        },
+        "examples": {
+          "templateType for BP confirmation": {
+            "summary": "Example of templateType for BP confirmation, this is setted as the default value",
+            "description": "templateType for BP confirmation",
+            "value": "confirm"
+          },
+          "templateType for Upselling confirmation": {
+            "summary": "Example of templateType for upselling confirmation, this is setted as the default value",
+            "description": "templateType for Upselling confirmation",
+            "value": "upselling-confirm"
+          }
+        }
+      },
+      {
+        "name": "signature",
+        "in": "query",
+        "description": "encrypted data containing reservationId, hotel backCode and checkin date.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "examples": {
+          "Signature": {
+            "summary": "encrypted data containing reservationId, hotel backCode and checkin date.",
+            "description": "Signature",
+            "value": "YbsC1wRd4574rm1AQbT5orwYaucvdYtOdHOaJ082r5f0KkB9PlBIkJZ9SkhvMa0UFfFpiT1Q%2BSE%3D"
+          }
+        }
+      },
+      {
+        "name": "program",
+        "in": "query",
+        "description": "The program name",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "examples": {
+          "NH-Discovery": {
+            "summary": "The name of the program",
+            "description": "NH-Discovery",
+            "value": "NHDISCOVERY"
+          }
+        }
+      }
+    ],
+    "requestBody": {
+      "description": "Email data request body",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "upsellingName": {
+                "type": "string"
+              },
+              "baseRoom": {
+                "type": "string"
+              },
+              "upgradedRoom": {
+                "type": "string"
+              },
+              "amountAfterTaxAndUpselling": {
+                "type": "string"
+              },
+              "contractedRooms": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "contractedStayOptions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "examples": {
+            "Confirmation example": {
+              "description": "Confirmation example",
+              "value": {}
+            },
+            "UpsellingMailData example": {
+              "description": "UpsellingMailData example",
+              "value": {
+                "upsellingMailData": {
+                  "upsellingName": "UP_BREAK",
+                  "baseRoom": "SUPDBL",
+                  "upgradedRoom": "SUPTPL",
+                  "amountAfterTaxAndUpselling": "100",
+                  "contractedRooms": [
+                    {
+                      "upsellingName": "BREAK",
+                      "upsellingPrice": "100",
+                      "upsellingTax": "2.0"
+                    }
+                  ],
+                  "contractedStayOptions": [
+                    {
+                      "upsellingName": "W_ROOM",
+                      "upsellingPrice": "100",
+                      "upsellingTax": "2.0"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "CalendarData",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "(404) The required content information was not found for given Hotels",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "(001) NullPointer or (500) Server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "POST /{lang}/getCalendarData": {
+    "tags": [
+      "CalendarData"
+    ],
+    "summary": "Get Calendar Data with Days & Prices for a particular hotel",
+    "description": "Get Calendar Data calling Connectivity layer and Content API",
+    "operationId": "handlerGetCalendarData",
+    "parameters": [
+      {
+        "name": "lang",
+        "in": "path",
+        "description": "lang for the request",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "examples": {
+          "Lang_for_english": {
+            "summary": "English",
+            "description": "Lang_for_english",
+            "value": "en"
+          },
+          "Lang_for_spanish": {
+            "summary": "Spanish",
+            "description": "Lang_for_spanish",
+            "value": 43
+          }
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "array",
+            "description": "backCodes from the hotels",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "CalendarData",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hotels": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "hotelId": {
+                        "type": "string"
+                      },
+                      "currency": {
+                        "type": "string"
+                      },
+                      "minPriceWithVat": {
+                        "type": "string"
+                      },
+                      "minPriceWithoutVat": {
+                        "type": "string"
+                      },
+                      "days": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "date": {
+                              "type": "string"
+                            },
+                            "minPriceWithVat": {
+                              "type": "string"
+                            },
+                            "minPriceWithoutVat": {
+                              "type": "string"
+                            },
+                            "priceTaxWithVat": {
+                              "type": "string"
+                            },
+                            "priceTaxWithoutVat": {
+                              "type": "string"
+                            },
+                            "enable": {
+                              "type": "boolean"
+                            },
+                            "closed": {
+                              "type": "boolean"
+                            },
+                            "closedForCheckIn": {
+                              "type": "boolean"
+                            },
+                            "closedForCheckOut": {
+                              "type": "boolean"
+                            },
+                            "daysEarlyBookingFrom": {
+                              "type": "number"
+                            },
+                            "daysEarlyBookingTo": {
+                              "type": "number"
+                            },
+                            "daysMinStay": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "roomType": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "(404) The required content information was not found for given Hotels",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "(001) NullPointer or (500) Server error",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "POST /rest/pci/notifications": {
+    "tags": [
+      "PaymentNotification"
+    ],
+    "summary": "Get Payment Notification",
+    "description": "Get Payment Notification from payment gateway such as Adyen",
+    "operationId": "handlerPaymentNotification",
+    "parameters": [
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "Authorization from payment gateway",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "examples": {
+          "Authorization": {
+            "summary": "Authorization from Adyen payment gateway in test env",
+            "description": "Authorization",
+            "value": "Basic dXNlcjpwYXNzd29yZA=="
+          }
+        }
+      }
+    ],
+    "requestBody": {
+      "description": "paymentNotification request body",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "live": {
+                "type": "string"
+              },
+              "notificationItems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "NotificationRequestItem": {
+                      "type": "object",
+                      "properties": {
+                        "additionalData": {
+                          "type": "object",
+                          "properties": {
+                            "acquirerCode": {
+                              "type": "string"
+                            },
+                            "expiryDate": {
+                              "type": "string"
+                            },
+                            "acquirerErrorCode": {
+                              "type": "string"
+                            },
+                            "acquirerReference": {
+                              "type": "string"
+                            },
+                            "alias": {
+                              "type": "string"
+                            },
+                            "aliasType": {
+                              "type": "string"
+                            },
+                            "arn": {
+                              "type": "string"
+                            },
+                            "authCode": {
+                              "type": "string"
+                            },
+                            "authorisedAmountCurrency": {
+                              "type": "string"
+                            },
+                            "authorisedAmountValue": {
+                              "type": "string"
+                            },
+                            "avsResult": {
+                              "type": "string"
+                            },
+                            "avsResultRaw": {
+                              "type": "string"
+                            },
+                            "bankAccountNumber": {
+                              "type": "string"
+                            },
+                            "bankLocationId": {
+                              "type": "string"
+                            },
+                            "bankName": {
+                              "type": "string"
+                            },
+                            "bic": {
+                              "type": "string"
+                            },
+                            "captureDelayHours": {
+                              "type": "string"
+                            },
+                            "cardBin": {
+                              "type": "string"
+                            },
+                            "cardHolderName": {
+                              "type": "string"
+                            },
+                            "cardIssuingBank": {
+                              "type": "string"
+                            },
+                            "cardIssuingCountry": {
+                              "type": "string"
+                            },
+                            "cardIssuingCurrency": {
+                              "type": "string"
+                            },
+                            "cardPaymentMethod": {
+                              "type": "string"
+                            },
+                            "cardSummary": {
+                              "type": "string"
+                            },
+                            "countryCode": {
+                              "type": "string"
+                            },
+                            "cvcResult": {
+                              "type": "string"
+                            },
+                            "cvcResultRaw": {
+                              "type": "string"
+                            },
+                            "fundingSource": {
+                              "type": "string"
+                            },
+                            "hmacSignature": {
+                              "type": "string"
+                            },
+                            "iban": {
+                              "type": "string"
+                            },
+                            "issuerCountry": {
+                              "type": "string"
+                            },
+                            "ownerName": {
+                              "type": "string"
+                            },
+                            "referred": {
+                              "type": "string"
+                            },
+                            "refusalReasonRaw": {
+                              "type": "string"
+                            },
+                            "threeDAuthenticatedResponse": {
+                              "type": "string"
+                            },
+                            "threeDOfferedResponse": {
+                              "type": "string"
+                            },
+                            "idealConsumerAccountNumber": {
+                              "type": "string"
+                            },
+                            "idealConsumerBIC": {
+                              "type": "string"
+                            },
+                            "idealConsumerCity": {
+                              "type": "string"
+                            },
+                            "idealConsumerIBAN": {
+                              "type": "string"
+                            },
+                            "idealConsumerName": {
+                              "type": "string"
+                            },
+                            "idealTransactionId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "eventCode": {
+                          "type": "string"
+                        },
+                        "success": {
+                          "type": "string"
+                        },
+                        "reason": {
+                          "type": "string"
+                        },
+                        "eventDate": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "merchantAccountCode": {
+                          "type": "string"
+                        },
+                        "pspReference": {
+                          "type": "string"
+                        },
+                        "originalReference": {
+                          "type": "string"
+                        },
+                        "merchantReference": {
+                          "type": "string"
+                        },
+                        "paymentMethod": {
+                          "type": "string"
+                        },
+                        "operations": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "amount": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "integer",
+                              "format": "int64"
+                            },
+                            "currency": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "examples": {
+            "paymentNotification": {
+              "summary": "adyen notification",
+              "description": "paymentNotification",
+              "value": " {\n  \"live\":\"false\",\n  \"notificationItems\":[\n     {\n        \"NotificationRequestItem\":{\n           \"additionalData\": {\n               ...\n           },\n           \"eventCode\":\"AUTHORISATION\",\n           \"success\":\"true\",\n           \"eventDate\":\"2019-06-28T18:03:50+01:00\",\n           \"merchantAccountCode\":\"YOUR_MERCHANT_ACCOUNT\",\n           \"pspReference\": \"7914073381342284\",\n           \"merchantReference\": \"YOUR_REFERENCE\",\n           \"amount\": {\n               \"value\":1130,\n               \"currency\":\"EUR\"\n           }\n        }\n     }\n  ]\n}"
+            }
+          }
+        }
+      },
+      "required": true
+    },
+    "responses": {
+      "200": {
+        "description": "PaymentNotification",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "(001) NullPointer or (500) Server error",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /rest/jsonCurrency": {
+    "tags": [
+      "currency-controller-impl"
+    ],
+    "operationId": "handlerGetCurrencyData",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "currencies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "conversions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "cur_dest": {
+                              "type": "string"
+                            },
+                            "rate": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "cur_origin": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /info": {
+    "tags": [
+      "Actuator"
+    ],
+    "summary": "Actuator web endpoint 'info'",
+    "operationId": "info",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/vnd.spring-boot.actuator.v3+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/vnd.spring-boot.actuator.v2+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /health": {
+    "tags": [
+      "Actuator"
+    ],
+    "summary": "Actuator web endpoint 'health'",
+    "operationId": "health",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/vnd.spring-boot.actuator.v3+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/vnd.spring-boot.actuator.v2+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /health/**": {
+    "tags": [
+      "Actuator"
+    ],
+    "summary": "Actuator web endpoint 'health-path'",
+    "operationId": "health-path",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/vnd.spring-boot.actuator.v3+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/vnd.spring-boot.actuator.v2+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /env": {
+    "tags": [
+      "Actuator"
+    ],
+    "summary": "Actuator web endpoint 'env'",
+    "operationId": "env",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/vnd.spring-boot.actuator.v3+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/vnd.spring-boot.actuator.v2+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "GET /env/{toMatch}": {
+    "tags": [
+      "Actuator"
+    ],
+    "summary": "Actuator web endpoint 'env-toMatch'",
+    "operationId": "env-toMatch",
+    "parameters": [
+      {
+        "name": "toMatch",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/vnd.spring-boot.actuator.v3+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/vnd.spring-boot.actuator.v2+json": {
+            "schema": {
+              "type": "object"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "*/*": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "detail": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
