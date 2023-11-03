@@ -21,3 +21,4 @@ Para cualquier consulta, puedes contactarme en `gerard.lopez.garcia@gmail.com`.
 ¡Espero que esta guía te ayude a mantener a todos al día sobre los cambios en la documentación! 😊🚀
 
 Autor : Gerard López García ©®
+Colaborador : Joan Osuna Aran
