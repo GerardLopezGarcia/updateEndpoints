@@ -13,9 +13,9 @@ async function sendEmail(changes) {
           }
     });
     let title = "🚀 Actualización semanal de endpoints 🐳";
-    let description = "Buenos días a todos! como cada lunes os traigo los cambios en los endpoints que se han producido durante la semana pasada:";
+    let description = "Buenos días a todos! Como cada lunes os traigo los cambios en los endpoints que se han producido durante la semana pasada:";
     let ending = "🔨 Sigamos construyendo y mejorando este software increíble juntos. ¡Hasta la próxima equipo! 📚📈"
-    let disclaimer = "🧪 * Este email ha sido autogenerado con una aplicación y podría contener fallos, en caso de encontrar algún endpoint de interés en el que se esté trabajando, revisar la documentación original. * 👨‍🔬 ©®Gerard López García";
+    let disclaimer = "🧪 * Este email ha sido autogenerado con una aplicación y podría contener fallos, en caso de encontrar algún endpoint de interés en el que se esté trabajando, revisar la documentación original. * 👨‍🔬 Autor: Gerard López García";
     let mailOptions = {
         from: process.env.EMAIL,
         to: process.env.EMAIL_RECIPIENTS,
@@ -35,6 +35,9 @@ async function sendEmail(changes) {
                         font-size: 14px;
                         line-height: 1.4;
                         border-radius: 11px;
+                        display: block;
+                        font-family: monospace;
+                        margin: 1em 0px;
                     }
                     h2 {
                         color: #4a86e8; 
@@ -53,11 +56,11 @@ async function sendEmail(changes) {
                     }
                 </style>
                 <body>
-                    <h1>${title}</h1>
-                    <p>${description}</p>
+                    <h1 style="color: #333;">${title}</h1>
+                    <p style="color: #666;">${description}</p>
                     ${changes}
-                    <p>${ending}</p>
-                    <p class="small-text">${disclaimer}</p>
+                    <p style="color: #666;">${ending}</p>
+                    <p style="font-size: 15px; color: #999999; font-style: italic;">${disclaimer}</p>
                 </body>`
     }
     
